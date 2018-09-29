@@ -43,6 +43,17 @@ function isInArray(arr, str)
 end function
 
 
+'==============================================
+' 向数组添加元素，如JavaScript的Array.push()函数
+'----------------------------------------------
+' By Hybin 2018-09-20
+'----------------------------------------------
+Function addItems(arr, item)
+  ReDim Preserve arr(UBound(arr) + 1)
+  arr(UBound(arr)) = item;
+  addItems = arr
+End Function
+
 '-------------------------
 ' 获取客户端IP
 '-------------------------
@@ -625,13 +636,20 @@ end function
 '----------------------------------------
 ' show construction list
 '----------------------------------------
-sub showConstructionList(rs, hasPage, urlparam)
+sub showConstructionList(rs, hasPage, urlparam, conditions)
   ' 显示构式列表
   ' rs：Construction Recordset
   '   SELECT * FROM construction  
   if not (rs.EOF or rs.BOF) then
     %>
     <h2>浏览数据库</h2>
+	<div class="search-conditions">
+		<ul>
+		<% For each item in conditions %>
+			<li><%=item%></li>
+		<% Next %>
+		</ul>
+	</div>
     <% if hasPage=1 then %>
     <p class="text-right muted"><%=rs.recordcount%>条结果，分<%=rs.pagecount%>页显示</p>
     <% end if %>

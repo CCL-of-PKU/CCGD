@@ -162,6 +162,7 @@ response.write "</div>"
 <%
 sub doSearch
 	dim cons_form, cons_example, variable_num_min, variable_num_max, constant_num_min, constant_num_max, url, cons_type, author
+	dim conditions() '收集查询条件 by Hybin on 2018-09-20
 	cons_form = request("cons_form")
 	cons_feature = request("cons_feature")	
 	cons_type = request("cons_type")
@@ -192,37 +193,43 @@ sub doSearch
 		order = order & rank_order
 	url = url & "rank_type=" & rank_type & "&rank_order=" & rank_order & "&"
 	'end
+	'收集查询条件，当且仅当条件不为空 by Hybin on 2018-09-20
 	if not isStrEmpty(cons_form) Then
 		'增加构式变体查询，by Dreamer on 2015-01-28
 		where = where & "AND (form like '%" & Replace(cons_form,"*","%") & "%' OR alter like '%" & Replace(cons_form,"*","%") & "%') "	
 		cons_form_uri = Replace(cons_form,"%","%25")
 		cons_form_uri = Replace(cons_form_uri,"+","%2B")
 		url = url & "cons_form=" & cons_form_uri & "&"
+		addItems(conditions, "构式形式：" & cons_form)
 	end If
 	if not isStrEmpty(c_str) Then
 		'增加构式常项查询，by Dreamer on 2015-01-28
 		where = where & "AND (cstr = '" & c_str & "' or cstr like '" & c_str & " %' OR cstr like '% " & c_str & "') or cstr like '% " & c_str & " %'"		
 		url = url & "c_str=" & c_str & "&"
+		addItems(conditions, "构式常项：" & c_str)
 	end if
 	if not isStrEmpty(cons_feature) Then
 	'增加空特征查询，by Dreamer on 2015-04-11
 	  If cons_feature = "-1" Then
 	    where = where & "AND feature = '' "
+		addItems(conditions, "构式特征：特征缺失")
 	  Else
 		where = where & "AND feature like '%" & Replace(cons_feature,", ","%") & "%' "
+		addItems(conditions, "构式常项：" & cons_feature)
 	  End If
 		url = url & "cons_feature=" & cons_feature & "&"	  
 	end If
 	'增加类型查询，by Dreamer on 2014-11-30
 	if not isStrEmpty(cons_type) Then
 	  If cons_type = "NULL" Then
-	                where = where & "AND type = '' "
+	    where = where & "AND type = '' "
 	  Else
 		where = where & "AND type = '" & cons_type &"' "
 	  End If
 		url = url & "cons_type=" & cons_type & "&"
+		addItems(conditions, "构式类型：" & cons_type)
 	end If
-                ' 实例查询
+    ' 实例查询
 	if not isStrEmpty(cons_example) then
                    if cons_example = "NULL" then
                                where = where & "AND  example = '' "
@@ -230,6 +237,7 @@ sub doSearch
 		where = where & "AND example like '%" & cons_example & "%' "
                    End if
                    url = url & "cons_example=" & cons_example & "&"
+		addItems(conditions, "构式实例：" & cons_example)
 	end if
 	if (not isStrEmpty(variable_num_min)) and (not isStrEmpty(variable_num_max)) then
 		if cint(variable_num_min) = cint(variable_num_max) then
@@ -240,6 +248,7 @@ sub doSearch
 		end if
 		url = url & "variable_num_min=" & variable_num_min & "&"
 		url = url & "variable_num_max=" & variable_num_max & "&"
+		addItems(conditions, "变项数量：" & variable_num_min & "-" & variable_num_max)
 	end if
 	if (not isStrEmpty(constant_num_min)) and (not isStrEmpty(constant_num_max)) then
 		if cint(constant_num_min) = cint(constant_num_max) then
@@ -250,22 +259,26 @@ sub doSearch
 		end if
 		url = url & "constant_num_min=" & constant_num_min & "&"
 		url = url & "constant_num_max=" & constant_num_max & "&"
+		addItems(conditions, "常项数量：" & constant_num_min & "-" & constant_num_max)
 	end if
 	'增加查询条件"录入者"，by Anran on 2015-11-02
 	if not isStrEmpty(author) then
 		where = where & "AND username = '" & author & "' "
 		url = url & "author=" & author & "&"
+		addItems(conditions, "录入者：" & author)
 	end if
 
 	'增加查询条件"update_time"，by zwd on 2018-03-15
 	if not isStrEmpty(postdatebegin) then
 		where = where & "AND update_time > #" & postdatebegin & "# "
 		url = url & "postdatebegin=" & postdatebegin & "&"
+		addItems(conditions, "填写时间：" & postdatebegin)
 	end if
 
 	if not isStrEmpty(postdateend) then
 		where = where & "AND update_time < #" & postdateend & "# "
 		url = url & "postdateend=" & postdateend & "&"
+		conditions(UBound(conditions)) = conditions(UBound(conditions)) & "-" & postdateend
 	end if
 
 	sql = sql & where & Order
@@ -292,7 +305,7 @@ sub doSearch
 	Else
 	    urlparam = ""
 	End If
-	call showConstructionList(rs, 1, urlparam)
+	call showConstructionList(rs, 1, urlparam, conditions)
 	if total_page > 1 then		
 		call showPagination(current_page, total_page, url)
 	end if
