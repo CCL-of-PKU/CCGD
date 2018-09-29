@@ -278,7 +278,7 @@ sub doSearch
 	if not isStrEmpty(postdateend) then
 		where = where & "AND update_time < #" & postdateend & "# "
 		url = url & "postdateend=" & postdateend & "&"
-		conditions(UBound(conditions)) = conditions(UBound(conditions)) & "-" & postdateend
+		conditions(UBound(conditions)) = conditions(UBound(conditions)) & "~" & postdateend
 	end if
 
 	sql = sql & where & Order
