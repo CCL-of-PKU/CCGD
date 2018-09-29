@@ -643,7 +643,7 @@ sub showConstructionList(rs, hasPage, urlparam, conditions)
   if not (rs.EOF or rs.BOF) then
     %>
     <h2>浏览数据库</h2>
-	<% if not (UBound(conditions) == 0) then %>
+	<% if IsArray(conditions) and UBound(conditions) <> -1 then %>
 	<div class="search-conditions">
 		<ul>
 		<% For each item in conditions %>
