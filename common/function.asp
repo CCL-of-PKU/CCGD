@@ -643,6 +643,7 @@ sub showConstructionList(rs, hasPage, urlparam, conditions)
   if not (rs.EOF or rs.BOF) then
     %>
     <h2>浏览数据库</h2>
+	<% if not (UBound(conditions) == 0) then %>
 	<div class="search-conditions">
 		<ul>
 		<% For each item in conditions %>
@@ -650,6 +651,7 @@ sub showConstructionList(rs, hasPage, urlparam, conditions)
 		<% Next %>
 		</ul>
 	</div>
+	<% end if %>
     <% if hasPage=1 then %>
     <p class="text-right muted"><%=rs.recordcount%>条结果，分<%=rs.pagecount%>页显示</p>
     <% end if %>

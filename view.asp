@@ -73,7 +73,7 @@ sub showList(num_form)
   rs.absolutepage = current_page
   total_page = rs.pagecount
   '跳转页面修复，by Dreamer on 2015-01-28
-  call showConstructionList(rs, num_form, "")
+  call showConstructionList(rs, num_form, "", conditions)
 
   if num_form = 1 and total_page > 1 then
     call showPagination(current_page, total_page, "view.asp?")
