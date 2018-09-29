@@ -51,6 +51,7 @@ end function
 function addItems(arr, item)
   ReDim Preserve arr(UBound(arr) + 1)
   arr(UBound(arr)) = item
+  addItems = arr
 end function
 
 '-------------------------
@@ -646,9 +647,13 @@ sub showConstructionList(rs, hasPage, urlparam, conditions)
 	<div class="search-conditions">
 		<p>查询条件: </p>
 		<ul>
+		<% if UBound(conditions) <> -1 then
 		<% For each item in conditions %>
 			<li><%=item%></li>
 		<% Next %>
+		<% else %>
+			<li>&lt;空&gt;</li>
+		<% end if %>
 		</ul>
 	</div>
 	<% end if %>
