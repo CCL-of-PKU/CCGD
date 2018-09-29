@@ -51,7 +51,6 @@ end function
 function addItems(arr, item)
   ReDim Preserve arr(UBound(arr) + 1)
   arr(UBound(arr)) = item
-  addItems = arr
 end function
 
 '-------------------------
