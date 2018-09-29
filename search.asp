@@ -206,16 +206,16 @@ sub doSearch
 		'增加构式常项查询，by Dreamer on 2015-01-28
 		where = where & "AND (cstr = '" & c_str & "' or cstr like '" & c_str & " %' OR cstr like '% " & c_str & "') or cstr like '% " & c_str & " %'"		
 		url = url & "c_str=" & c_str & "&"
-		addItems(conditions, "构式常项：" & c_str)
+		call addItems(conditions, "构式常项：" & c_str)
 	end if
 	if not isStrEmpty(cons_feature) Then
 	'增加空特征查询，by Dreamer on 2015-04-11
 	  If cons_feature = "-1" Then
 	    where = where & "AND feature = '' "
-		addItems(conditions, "构式特征：特征缺失")
+		call addItems(conditions, "构式特征：特征缺失")
 	  Else
 		where = where & "AND feature like '%" & Replace(cons_feature,", ","%") & "%' "
-		addItems(conditions, "构式常项：" & cons_feature)
+		call addItems(conditions, "构式常项：" & cons_feature)
 	  End If
 		url = url & "cons_feature=" & cons_feature & "&"	  
 	end If
@@ -227,7 +227,7 @@ sub doSearch
 		where = where & "AND type = '" & cons_type &"' "
 	  End If
 		url = url & "cons_type=" & cons_type & "&"
-		addItems(conditions, "构式类型：" & cons_type)
+		call addItems(conditions, "构式类型：" & cons_type)
 	end If
     ' 实例查询
 	if not isStrEmpty(cons_example) then
@@ -237,7 +237,7 @@ sub doSearch
 		where = where & "AND example like '%" & cons_example & "%' "
                    End if
                    url = url & "cons_example=" & cons_example & "&"
-		addItems(conditions, "构式实例：" & cons_example)
+		call addItems(conditions, "构式实例：" & cons_example)
 	end if
 	if (not isStrEmpty(variable_num_min)) and (not isStrEmpty(variable_num_max)) then
 		if cint(variable_num_min) = cint(variable_num_max) then
@@ -248,7 +248,7 @@ sub doSearch
 		end if
 		url = url & "variable_num_min=" & variable_num_min & "&"
 		url = url & "variable_num_max=" & variable_num_max & "&"
-		addItems(conditions, "变项数量：" & variable_num_min & "-" & variable_num_max)
+		call addItems(conditions, "变项数量：" & variable_num_min & "-" & variable_num_max)
 	end if
 	if (not isStrEmpty(constant_num_min)) and (not isStrEmpty(constant_num_max)) then
 		if cint(constant_num_min) = cint(constant_num_max) then
@@ -259,20 +259,20 @@ sub doSearch
 		end if
 		url = url & "constant_num_min=" & constant_num_min & "&"
 		url = url & "constant_num_max=" & constant_num_max & "&"
-		addItems(conditions, "常项数量：" & constant_num_min & "-" & constant_num_max)
+		call addItems(conditions, "常项数量：" & constant_num_min & "-" & constant_num_max)
 	end if
 	'增加查询条件"录入者"，by Anran on 2015-11-02
 	if not isStrEmpty(author) then
 		where = where & "AND username = '" & author & "' "
 		url = url & "author=" & author & "&"
-		addItems(conditions, "录入者：" & author)
+		call addItems(conditions, "录入者：" & author)
 	end if
 
 	'增加查询条件"update_time"，by zwd on 2018-03-15
 	if not isStrEmpty(postdatebegin) then
 		where = where & "AND update_time > #" & postdatebegin & "# "
 		url = url & "postdatebegin=" & postdatebegin & "&"
-		addItems(conditions, "填写时间：" & postdatebegin)
+		call addItems(conditions, "填写时间：" & postdatebegin)
 	end if
 
 	if not isStrEmpty(postdateend) then
