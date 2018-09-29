@@ -648,7 +648,7 @@ sub showConstructionList(rs, hasPage, urlparam, conditions)
 		<p>查询条件: </p>
 		<ul>
 		<% if UBound(conditions) <> -1 then
-		<% For each item in conditions %>
+		   For each item in conditions %>
 			<li><%=item%></li>
 		<% Next %>
 		<% else %>
