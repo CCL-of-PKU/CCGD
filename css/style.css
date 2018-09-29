@@ -80,6 +80,11 @@ table.table td,table.table th {
     font-size:26px;
 }
 
+.search-conditions * {
+	display: inline-block;
+	vertical-align: middle;
+}
+
 .search-conditions ul {
 	list-style: none;
 }
@@ -89,6 +94,7 @@ table.table td,table.table th {
 	background-color: rgb(17, 134, 204);
 	color: white;
 	padding: 0 1em;
+	border-radius: 5px;
 }
 
 .pagination ul.first-page {

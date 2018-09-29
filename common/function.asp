@@ -644,6 +644,7 @@ sub showConstructionList(rs, hasPage, urlparam, conditions)
     <h2>浏览数据库</h2>
 	<% if IsArray(conditions) then %>
 	<div class="search-conditions">
+		<p>查询条件: </p>
 		<ul>
 		<% For each item in conditions %>
 			<li><%=item%></li>
