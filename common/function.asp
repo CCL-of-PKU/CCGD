@@ -48,11 +48,11 @@ end function
 '----------------------------------------------
 ' By Hybin 2018-09-20
 '----------------------------------------------
-Function addItems(arr, item)
+function addItems(arr, item)
   ReDim Preserve arr(UBound(arr) + 1)
   arr(UBound(arr)) = item
   addItems = arr
-End Function
+end function
 
 '-------------------------
 ' 获取客户端IP

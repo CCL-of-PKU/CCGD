@@ -200,7 +200,7 @@ sub doSearch
 		cons_form_uri = Replace(cons_form,"%","%25")
 		cons_form_uri = Replace(cons_form_uri,"+","%2B")
 		url = url & "cons_form=" & cons_form_uri & "&"
-		addItems(conditions, "构式形式：" & cons_form)
+		call addItems(conditions, "构式形式：" & cons_form)
 	end If
 	if not isStrEmpty(c_str) Then
 		'增加构式常项查询，by Dreamer on 2015-01-28
