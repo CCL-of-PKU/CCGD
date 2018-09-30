@@ -59,7 +59,7 @@ response.write "</div>"
 
 <%
 sub doSearch
-	dim url, sql, conditions
+	dim url, sql, conditions, word_value
 	conditions = Array()   '增加查询条件記錄, by Hybin on 2018-09-21
 	url = "search_detail.asp?action=do&"
 	sql = "SELECT DISTINCT construction.ID as ID, construction.form as form,construction.feature as feature,construction.type as type,example,definition,variables,constants " &_
