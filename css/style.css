@@ -102,6 +102,10 @@ table.table td,table.table th {
 	border-radius: 2.5px;
 }
 
+a.back-to-list {
+	cursor: pointer;
+}
+
 .pagination ul.first-page {
     margin-right:10px;
 }

@@ -164,7 +164,8 @@ sub showDetail
     set rs = nothing
   end if
   %>
-  <h4 class="text-right"><a href="search.asp?action=do<%=urlparam%>">返回列表</a></h4>
+  <!-- <h4 class="text-right"><a href="search.asp?action=do<%=urlparam%>">返回列表</a></h4> -->
+  <h4 class="text-right"><a class="back-to-list">返回列表</a></h4>
   <div class="accordion" id="construction-info">
   <div class="accordion-group">
   <div class="accordion-heading">
@@ -708,6 +709,7 @@ sub showDetail
   </div>
 
   </div>
+  <!-- 不能忽视由高级搜索所得结果中的详细入口, Hybin 2018-09-21 -->
   <!-- <h4 class="text-right"><a href="search.asp?action=do<%=urlparam%>">返回列表</a></h4> -->
   <h4 class="text-right"><a class="back-to-list">返回列表</a></h4>
 <% end sub %>
