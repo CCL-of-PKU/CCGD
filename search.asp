@@ -163,7 +163,7 @@ response.write "</div>"
 sub doSearch
 	dim cons_form, cons_example, variable_num_min, variable_num_max, constant_num_min, constant_num_max, url, cons_type, author, conditions
 	conditions = Array() '收集查询条件 by Hybin on 2018-09-20
-	cons_form = request("cons_form")
+	cons_form = Replace(request("cons_form"), "+", "")
 	cons_feature = request("cons_feature")	
 	cons_type = request("cons_type")
 	cons_example = request("cons_example")
