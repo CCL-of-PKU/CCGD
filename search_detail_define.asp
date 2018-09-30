@@ -7,7 +7,7 @@
 
 ' 基本信息表:Construction
 dim BaseInfo(14)
-BaseInfo(0) = Array("form", "构式形式", "text", "text")
+BaseInfo(0) = Array("form2", "构式形式", "text", "text")
 BaseInfo(1) = Array("feature", "构式特征", "feature", "text")
 BaseInfo(2) = Array("type", "构式类型", "type", "text")
 BaseInfo(3) = Array("example", "构式实例", "text", "text")
