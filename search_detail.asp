@@ -97,6 +97,7 @@ sub doSearch
 				'end if
 
 				if not isStrEmpty(word_value) then
+					' 构式形式的模糊查找，by Hybin on 2018-09-22
 					if TableInfo(count)(1)(word_num)(0) = "form2" then
 						word_value = Replace(request(word_str), "+", "")
 					end if
