@@ -76,23 +76,24 @@ sub doSearch
 		while word_num < ubound(TableInfo(count)(1))
 			if not TableInfo(count)(1)(word_num)(2) = "min-max" then
 				word_str = TableInfo(count)(2) & "_" & TableInfo(count)(1)(word_num)(0)
+				word_value = request(word_str)
 				'response.write "word_str=" & word_str & "<br>"
-				if TableInfo(count)(1)(word_num)(0) = "feature" then
-					if not isStrEmpty(request(word_str)) then 
-						word_value = FEATURE_VALUE_ARRAY(request(word_str))
-					end if
+				'if TableInfo(count)(1)(word_num)(0) = "feature" then
+				'	if not isStrEmpty(request(word_str)) then 
+				'		word_value = FEATURE_VALUE_ARRAY(request(word_str))
+				'	end if
 					'response.write "word_value_feature:" & word_value & "<br>"
-				end if
-				if TableInfo(count)(1)(word_num)(0) = "type" then
-					if not isStrEmpty(request(word_str)) then
-						word_value = TYPE_VALUE_ARRAY(request(word_str))
-					end if
+				'end if
+				'if TableInfo(count)(1)(word_num)(0) = "type" then
+				'	if not isStrEmpty(request(word_str)) then
+				'		word_value = TYPE_VALUE_ARRAY(request(word_str))
+				'	end if
 					'response.write "word_value_type:" & word_value & "<br>"
-				end if
-				if TableInfo(count)(1)(word_num)(0) <> "feature" AND TableInfo(count)(1)(word_num)(0) <> "type" then
-					word_value = request(word_str)
+				'end if
+				'if TableInfo(count)(1)(word_num)(0) <> "feature" AND TableInfo(count)(1)(word_num)(0) <> "type" then
+				'	word_value = request(word_str)
 					'response.write "word_value=" & word_value & "<br>"
-				end if
+				'end if
 
 				if not isStrEmpty(word_value) then
 					if TableInfo(count)(1)(word_num)(3) = "text" then
