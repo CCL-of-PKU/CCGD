@@ -29,6 +29,7 @@
 	<script src="js/en.min.js" type="text/javascript"></script>
 	
 	<link href="css/style.css" rel="stylesheet" media="screen">
+	<script src="js/app.js" type="text/javascript"></script>
 	
   </head>
   <body>

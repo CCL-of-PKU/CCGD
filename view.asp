@@ -708,7 +708,8 @@ sub showDetail
   </div>
 
   </div>
-  <h4 class="text-right"><a href="search.asp?action=do<%=urlparam%>">返回列表</a></h4>
+  <!-- <h4 class="text-right"><a href="search.asp?action=do<%=urlparam%>">返回列表</a></h4> -->
+  <h4 class="text-right"><a class="back-to-list">返回列表</a></h4>
 <% end sub %>
 
 <%
