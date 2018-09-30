@@ -59,7 +59,7 @@ response.write "</div>"
 
 <%
 sub doSearch
-	dim url, sql, conditions, word_value
+	dim url, sql, conditions
 	conditions = Array()   '增加查询条件記錄, by Hybin on 2018-09-21
 	url = "search_detail.asp?action=do&"
 	sql = "SELECT DISTINCT construction.ID as ID, construction.form as form,construction.feature as feature,construction.type as type,example,definition,variables,constants " &_
@@ -76,6 +76,7 @@ sub doSearch
 		while word_num < ubound(TableInfo(count)(1))
 			if not TableInfo(count)(1)(word_num)(2) = "min-max" then
 				word_str = TableInfo(count)(2) & "_" & TableInfo(count)(1)(word_num)(0)
+				word_value = "test"
 				'response.write "word_str=" & word_str & "<br>"
 				if TableInfo(count)(1)(word_num)(0) = "feature" then
 					if not isStrEmpty(request(word_str)) then 
