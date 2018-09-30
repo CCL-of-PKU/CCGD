@@ -464,6 +464,8 @@ function do_update(form_info, table_name)
   v_str = ""
   cons_num = 0
   vari_num = 0
+  dedup = ""     '构式形式（不含+号）
+  dealter = ""   '构式变体（不含+号）
 
   Set rs = Server.CreateObject("adodb.recordset")
 
@@ -490,6 +492,7 @@ function do_update(form_info, table_name)
         v_str = v_str & items(i) & " "
         vari_num = vari_num + 1
         count_pos = count_pos + 1
+		dedup = dedup & items(i)
       Else        
         newsql = "select cat, py from syndict where lex = '" & items(i) & "'"
         rs.open newsql,Conn,1,1
@@ -510,6 +513,7 @@ function do_update(form_info, table_name)
         c_str = c_str & items(i) & " "
         cons_num = cons_num + 1
         count_pos = count_pos + 1
+		dedup = dedup & items(i)
       End If
     Next
     If v_str <> "" Then
@@ -520,6 +524,16 @@ function do_update(form_info, table_name)
     End If
   End If
   'End 增加构式常变项组合提取
+
+  '保存构式变体（不含+号）by Hybin on 2018-09-22
+  dim dealter
+  alter = Replace(request.form("alter"), "，", "+")
+  alter = Replace(alter, ",", "+")
+  aitems = Split(alter, "+")
+  For Each ai in aitems
+	dealter = dealter & ai
+  Next
+
   count = 0
   while count < ubound(form_info)
     newsql = "SELECT * FROM construction WHERE id = " & request.form("id")  ' zwd 2016-06-08
@@ -569,7 +583,7 @@ function do_update(form_info, table_name)
   Wend
   '增加构式常变项组合提取，by Dreamer on 2014-12-08
   If table_name = "construction" Then
-    sql = sql & ", cstr='" & c_str & "', vstr='" & v_str & "'"
+    sql = sql & ", cstr='" & c_str & "', vstr='" & v_str & "', form2='" & dedup & "', alter2='" & dealter & "'"
   End If
   sql = sql & " WHERE ID=" & request.form("current_id")
   'response.write "sql=" & sql & "<br>"
