@@ -159,7 +159,8 @@ sub doSearch
 	'跳转页面修复，by Dreamer on 2015-01-28
 	urlparam = Mid(url,29)
 '	call showConstructionList(rs, 1)
-	call showConstructionList(rs, 1, urlparam) 'zwd  2016-06-22
+'	call showConstructionList(rs, 1, urlparam) 'zwd  2016-06-22
+	call showConstructionList(rs, 1, urlparam, conditions) 'Hybin 2018-09-21
 	
 	if total_page > 1 then		
 		call showPagination(current_page, total_page, url)
