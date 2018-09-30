@@ -62,7 +62,7 @@ sub doSearch
 	dim url, sql, conditions
 	conditions = Array()   '增加查询条件記錄, by Hybin on 2018-09-21
 	url = "search_detail.asp?action=do&"
-	sql = "SELECT DISTINCT construction.ID as ID, construction.form as form,construction.feature as feature,construction.type as type,example,definition,variables,constants " &_
+	sql = "SELECT DISTINCT construction.ID as ID, construction.form as form,construction.feature as feature,construction.type as type,example,definition,variables,constants,yixiang " &_
 		"FROM ((((((construction LEFT JOIN constant ON construction.ID = constant.construction_id) " &_
 		"LEFT JOIN variable ON construction.ID = variable.construction_id) " &_
 		"LEFT JOIN syntax ON construction.ID = syntax.construction_id) " &_
