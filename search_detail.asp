@@ -59,7 +59,8 @@ response.write "</div>"
 
 <%
 sub doSearch
-	dim url, sql
+	dim url, sql, conditions
+	conditions = Array()   '增加查询条件記錄, by Hybin on 2018-09-21
 	url = "search_detail.asp?action=do&"
 	sql = "SELECT DISTINCT construction.ID as ID, construction.form as form,construction.feature as feature,construction.type as type,example,definition,variables,constants " &_
 		"FROM ((((((construction LEFT JOIN constant ON construction.ID = constant.construction_id) " &_
@@ -111,6 +112,7 @@ sub doSearch
 						sql = sql & "AND " & TableInfo(count)(2) & ".ID"  & "=" & word_value & " "
 						'response.write "SQL3=" & sql & "<br>"
 					end if
+					call addItems(conditions, TableInfo(count)(1)(word_num)(1) & ": " & word_value)
 					url = url & word_str & "=" & word_value & "&"
 				end if
 			else
@@ -127,6 +129,7 @@ sub doSearch
 						sql = sql & "AND " & TableInfo(count)(2) & "." & TableInfo(count)(1)(word_num)(0) & " between " & cint(min_num) & " and " & cint(max_num) & " "
 						'response.write "SQL5=" & sql & "<br>"
 					end if
+					call addItems(conditions, TableInfo(count)(1)(word_num)(1) & ": " & min_num & "~" & max_num)
 					url = url & min_str & "=" & min_num & "&"
 					url = url & max_str & "=" & max_num & "&"
 				end if
