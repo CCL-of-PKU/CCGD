@@ -807,7 +807,7 @@ sub showSearchDetailForm(form_info, table_name)
             <option value="">请选择<%=form_info(count)(1)%></option>
             <% i = 0
             while i <= ubound(FEATURE_VALUE_ARRAY) %>
-              <option value="<%=i%>"><%=FEATURE_VALUE_ARRAY(i)%></option>
+              <option value="<%=FEATURE_VALUE_ARRAY(i)%>"><%=FEATURE_VALUE_ARRAY(i)%></option>
               <% i = i + 1
             wend %>
           </select>
@@ -818,7 +818,7 @@ sub showSearchDetailForm(form_info, table_name)
             <option value="">请选择<%=form_info(count)(1)%></option>
             <% i = 0
             while i <= ubound(TYPE_VALUE_ARRAY) %>
-              <option value="<%=i%>"><%=TYPE_VALUE_ARRAY(i)%></option>
+              <option value="<%=TYPE_VALUE_ARRAY(i)%>"><%=TYPE_VALUE_ARRAY(i)%></option>
               <% i = i + 1
             wend %>
           </select>
