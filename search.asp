@@ -196,7 +196,8 @@ sub doSearch
 	'收集查询条件，当且仅当条件不为空 by Hybin on 2018-09-20
 	if not isStrEmpty(cons_form) Then
 		'增加构式变体查询，by Dreamer on 2015-01-28
-		where = where & "AND (form like '%" & Replace(cons_form,"*","%") & "%' OR alter like '%" & Replace(cons_form,"*","%") & "%') "	
+		'查询时忽视+号，by Hybin on 2018-09-22
+		where = where & "AND (form2 like '%" & Replace(cons_form,"*","%") & "%' OR alter2 like '%" & Replace(cons_form,"*","%") & "%') "	
 		cons_form_uri = Replace(cons_form,"%","%25")
 		cons_form_uri = Replace(cons_form_uri,"+","%2B")
 		url = url & "cons_form=" & cons_form_uri & "&"
