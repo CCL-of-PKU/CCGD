@@ -324,13 +324,6 @@ function do_insert(form_info, table_name)
             Construction_Form_Checked = False
         end if
     end if
-%>
-	<script type="text/vbscript">
-	if Construction_Form_Checked = False then
-		choice = MsgBox("检测到存在构式形式相同且义项相同的构式，是否继续添加？", 4, "注意")
-	end if
-	</script>
-<%
 
     if (Construction_Form_Checked = true) or (choice = 6) then
 	     sql = "INSERT INTO " & table_name & " ( "
