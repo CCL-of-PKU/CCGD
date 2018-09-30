@@ -332,7 +332,7 @@ function do_insert(form_info, table_name)
 	     v_str = ""
 	     cons_num = 0
 	     vari_num = 0
-                     dedup = ""
+         dedup = ""
 	     '增加构式常变项组合提取，by Dreamer on 2014-12-08
 	     If table_name = "construction" Then
 		'提取下一个ID
@@ -379,6 +379,15 @@ function do_insert(form_info, table_name)
 		End If
 	  End If
 	  'End 增加构式常变项组合提取
+	  
+	  '保存构式变体（不含+号）by Hybin on 2018-09-22
+	  dim dealter
+	  alter = Replace(request.form("alter"), "，", "+")
+	  alter = Replace(alter, ",", "+")
+	  aitems = Split(alter, "+")
+	  For Each ai in aitems
+		dealter = dealter & ai
+	  Next
 
 	  count = 0
 	  while count < ubound(form_info)
@@ -418,8 +427,8 @@ function do_insert(form_info, table_name)
 	  
 	  '增加构式常变项组合提取，by Dreamer on 2014-12-08
 	  If table_name = "construction" Then
-		sql = sql & ", cstr, vstr, dedup"
-		values = values & ",'" & c_str & "','" & v_str & "','" & dedup & "'"
+		sql = sql & ", cstr, vstr, form2, alter2"
+		values = values & ",'" & c_str & "','" & v_str & "','" & dedup & "','" & dealter & "'"
 	  End If
 
 	  sql = sql & ") " & values & ")"
@@ -916,7 +925,7 @@ function isExistedForm(str,sense)
 		dedup = dedup & elem
 	Next
 
-	the_sql = "select ID from construction where dedup = '" & dedup & "' AND yixiang = " & sense & " AND deleted is null"
+	the_sql = "select ID from construction where form2 = '" & dedup & "' AND yixiang = " & sense & " AND deleted is null"
 	Set rs = Server.CreateObject("adodb.recordset")
 	rs.open the_sql, Conn, 1, 1
 	count = rs.RecordCount
