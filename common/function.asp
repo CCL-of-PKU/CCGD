@@ -316,7 +316,7 @@ end function
 function do_insert(form_info, table_name)
 '如果构式形式相同且相同义项编号已经存在，则不能增加新的记录 zwd 2016-10-07
 '只有碰到多义构式时，才需要增加相同的构式形式的记录
-    Dim Construction_Form_Checked
+    Dim Construction_Form_Checked, choice
     Construction_Form_Checked = True 'The construction added should be a new one
 
     if table_name = "construction" then
@@ -325,7 +325,11 @@ function do_insert(form_info, table_name)
         end if
     end if
 
-    if Construction_Form_Checked = true then
+	if Construction_Form_Checked = False then
+		choice = MsgBox("检测到存在构式形式相同且义项相同的构式，是否继续添加？", 4, "注意")
+	end if
+
+    if (Construction_Form_Checked = true) or (choice = 6) then
 	     sql = "INSERT INTO " & table_name & " ( "
 	     values = "VALUES ( "
 	     c_str = ""
@@ -933,11 +937,8 @@ function isExistedForm(str,sense)
   '------------------------------
   ' 删除str中的+号并重组，以作去重判断
   '------------------------------
-	elems = Split(str, "+")
 	Dim dedup
-	For each elem in elems
-		dedup = dedup & elem
-	Next
+	dedup = Replace(str, "+", "")
 
 	the_sql = "select ID from construction where form2 = '" & dedup & "' AND yixiang = " & sense & " AND deleted is null"
 	Set rs = Server.CreateObject("adodb.recordset")
