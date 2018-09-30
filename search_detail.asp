@@ -76,7 +76,6 @@ sub doSearch
 		while word_num < ubound(TableInfo(count)(1))
 			if not TableInfo(count)(1)(word_num)(2) = "min-max" then
 				word_str = TableInfo(count)(2) & "_" & TableInfo(count)(1)(word_num)(0)
-				word_value = ""
 				'response.write "word_str=" & word_str & "<br>"
 				if TableInfo(count)(1)(word_num)(0) = "feature" then
 					if not isStrEmpty(request(word_str)) then 
@@ -113,7 +112,7 @@ sub doSearch
 						sql = sql & "AND " & TableInfo(count)(2) & ".ID"  & "=" & word_value & " "
 						'response.write "SQL3=" & sql & "<br>"
 					end if
-					call addItems(conditions, TableInfo(count)(1)(word_num)(1) & ": " & word_value)
+					call addItems(conditions, TableInfo(count)(1)(word_num)(1) & ": " & request(word_str))
 					url = url & word_str & "=" & word_value & "&"
 				end if
 			else
