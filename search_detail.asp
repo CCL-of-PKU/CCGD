@@ -112,7 +112,7 @@ sub doSearch
 						sql = sql & "AND " & TableInfo(count)(2) & ".ID"  & "=" & word_value & " "
 						'response.write "SQL3=" & sql & "<br>"
 					end if
-					call addItems(conditions, TableInfo(count)(1)(word_num)(1) & ": " & word_str)
+					call addItems(conditions, TableInfo(count)(1)(word_num)(1) & ": " & word_value)
 					url = url & word_str & "=" & word_value & "&"
 				end if
 			else
