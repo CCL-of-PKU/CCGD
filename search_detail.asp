@@ -97,6 +97,10 @@ sub doSearch
 				'end if
 
 				if not isStrEmpty(word_value) then
+					if TableInfo(count)(1)(word_num)(0) = "form2" then
+						word_value = Replace(request(word_str), "+", "")
+					end if
+
 					if TableInfo(count)(1)(word_num)(3) = "text" then
 						if TableInfo(count)(1)(word_num)(0) <> "type" then 
 							sql = sql & "AND " & TableInfo(count)(2) & "." & TableInfo(count)(1)(word_num)(0) & " like '%" & word_value & "%' "
