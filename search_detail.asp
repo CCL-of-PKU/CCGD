@@ -62,7 +62,7 @@ sub doSearch
 	dim url, sql, conditions
 	conditions = Array()   '增加查询条件記錄, by Hybin on 2018-09-21
 	url = "search_detail.asp?action=do&"
-	sql = "SELECT DISTINCT construction.ID as ID, construction.form as form,construction.feature as feature,construction.type as type,example,definition,variables,constants,yixiang " &_
+	sql = "SELECT DISTINCT construction.ID as ID, construction.form as form,construction.feature as feature,construction.type as type,example,definition,variables,constants,yixiang " &_   '修复搜索结果无法读取义项的问题，by Hybin on 2018-09-21
 		"FROM ((((((construction LEFT JOIN constant ON construction.ID = constant.construction_id) " &_
 		"LEFT JOIN variable ON construction.ID = variable.construction_id) " &_
 		"LEFT JOIN syntax ON construction.ID = syntax.construction_id) " &_
@@ -114,7 +114,7 @@ sub doSearch
 						'response.write "SQL3=" & sql & "<br>"
 					end if
 					call addItems(conditions, TableInfo(count)(1)(word_num)(1) & ": " & request(word_str))
-					url = url & word_str & "=" & word_value & "&"
+					url = url & word_str & "=" & request(word_str) & "&"
 				end if
 			else
 				min_str = TableInfo(count)(2) & "_" & TableInfo(count)(1)(word_num)(0) & "_min"
