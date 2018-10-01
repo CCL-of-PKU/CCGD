@@ -313,6 +313,21 @@ end function
 '-------------------------------
 ' DO INSERT FROM the FORM
 '-------------------------------
+' 获取构式关系信息 by Hybin 2018-09-23
+function get_relations(rel_type, cxn, rs, Conn)
+	Dim rels
+	query = "SELECT * FROM `construction` WHERE" & rel_type & " = " & cxn
+	rs.open query, Conn, 1, 1
+	
+    While not rs.EOF
+      rels = rels & "|" & rs("form")
+      rs.MoveNext
+    Wend
+
+	rs.close
+	get_relations = rels
+end function
+	
 function do_insert(form_info, table_name)
 '如果构式形式相同且相同义项编号已经存在，则不能增加新的记录 zwd 2016-10-07
 '只有碰到多义构式时，才需要增加相同的构式形式的记录
@@ -424,6 +439,11 @@ function do_insert(form_info, table_name)
 		End If
 		count = count + 1
 	  Wend
+	  '自动查找构式关系信息 by Hybin on 2018-09-23
+	  synonymous = get_relations("synonymous", request.form("form"), rs, Conn)
+	  antonym = get_relations("antonym", request.form("form"), rs, Conn)
+	  hyponym = get_relations("hypernym", request.form("form"), rs, Conn)
+	  hypernym = get_relations("hyponym", request.form("form"), rs. Conn) 
 	  
 	  '增加构式常变项组合提取，by Dreamer on 2014-12-08
 	  If table_name = "construction" Then
@@ -433,6 +453,10 @@ function do_insert(form_info, table_name)
 
 	  sql = sql & ") " & values & ")"
 	  Conn.Execute sql
+
+	  '更新构式关系 Hybin 2018-09-23
+	  Conn.Execute("UPDATE construction SET synonymous = " & synonymous & ", antonym = " & antonym & ", hypernym = " & hypernym & ", hyponym = " & hyponym " WHERE form = " & request.form("form"))
+
 	  if table_name = "construction" then
 		session("construction") = request.form("form")
 	  end if
