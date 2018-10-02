@@ -590,10 +590,11 @@ sub showDetail
   </h2>
   </div>
   <%
-  dim PragmaticInfo(3)
+  dim PragmaticInfo(4)
   PragmaticInfo(0) = Array("emotional", "感情色彩")
   PragmaticInfo(1) = Array("stylistic", "语体色彩")
   PragmaticInfo(2) = Array("field", "领域限制")
+  PragmaticInfo(3) = Array("context", "上下文环境")
   %>
   <div id="pragmatic-info" class="accordion-body collapse">
   <div class="accordion-inner">
