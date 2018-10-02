@@ -443,7 +443,7 @@ function do_insert(form_info, table_name)
 	  synonymous = get_relations("synonymous", request.form("form"), rs, Conn)
 	  antonym = get_relations("antonym", request.form("form"), rs, Conn)
 	  hyponym = get_relations("hypernym", request.form("form"), rs, Conn)
-	  hypernym = get_relations("hyponym", request.form("form"), rs. Conn) 
+	  hypernym = get_relations("hyponym", request.form("form"), rs, Conn) 
 	  
 	  '增加构式常变项组合提取，by Dreamer on 2014-12-08
 	  If table_name = "construction" Then
