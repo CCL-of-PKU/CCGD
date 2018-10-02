@@ -10,4 +10,11 @@ $(document).ready(function () {
 	$('a.back-to-list').click(function () {
 		window.history.back();
 	});
+
+	$('td.syntax-func').click(function () {
+		if ($('tr.syntax-sample').css('display') == 'none')
+			$('tr.syntax-sample').show();
+		else
+			$('tr.syntax-sample').hide();
+	});
 })

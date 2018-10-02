@@ -476,6 +476,7 @@ sub showDetail
   </h2>
   </div>
   <%
+  '新增句法信息“独立成句”、“自由使用”、实例 by Hybin 2018-09-23
   dim SyntaxInfo(17)
   SyntaxInfo(0) = Array("as_subject", "是否做主语")
   SyntaxInfo(1) = Array("as_predicate", "是否做谓语")
@@ -504,11 +505,11 @@ sub showDetail
       while count<ubound(SyntaxInfo)
         'if not isStrEmpty(rs(SyntaxInfo(count)(0))) then
           response.write "<tr class='syntax-func'>"
-          response.write "<td>" & SyntaxInfo(count)(1) & "</td>"
+          response.write "<td class='left'>" & SyntaxInfo(count)(1) & "</td>"
           response.write "<td>" & rs(SyntaxInfo(count)(0)) & "</td>"
           response.write "</tr>"
 		  response.write "<tr class='syntax-sample'>"
-		  response.write "<td>实例</td>"
+		  response.write "<td class='left'>实例</td>"
 		  response.write "<td>" & "</td>"
 		  response.write "</tr>"
         'end if

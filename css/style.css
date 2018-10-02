@@ -114,6 +114,14 @@ a.back-to-list {
     margin-left:10px;
 }
 
+div#syntax-info td.left {
+	width: 30%;
+}
+
+div#syntax-info tr.syntax-sample {
+	display: none;
+}
+
 .footer p {
     text-align:right;
 }
