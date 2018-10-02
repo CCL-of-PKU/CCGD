@@ -7,14 +7,18 @@
  */
 
 $(document).ready(function () {
+	// 详细页面返回上层
 	$('a.back-to-list').click(function () {
 		window.history.back();
 	});
 
+	// 显示或隐藏句法信息中的实例
 	$('tr.syntax-func').click(function () {
-		if ($('tr.syntax-sample').css('display') == 'none')
-			$('tr.syntax-sample').show();
+		let id = $(this).attr('id');
+
+		if ($('tr.syntax-sample#' + id).css('display') == 'none')
+			$('tr.syntax-sample#' + id).show();
 		else
-			$('tr.syntax-sample').hide();
+			$('tr.syntax-sample#' + id).hide();
 	});
 })

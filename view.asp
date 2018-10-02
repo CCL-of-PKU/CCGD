@@ -504,11 +504,11 @@ sub showDetail
       count = 0
       while count<ubound(SyntaxInfo)
         'if not isStrEmpty(rs(SyntaxInfo(count)(0))) then
-          response.write "<tr class='syntax-func'>"
+          response.write "<tr class='syntax-func' id='" & SyntaxInfo(count)(0) & "'>"
           response.write "<td class='left'>" & SyntaxInfo(count)(1) & "</td>"
           response.write "<td>" & rs(SyntaxInfo(count)(0)) & "</td>"
           response.write "</tr>"
-		  response.write "<tr class='syntax-sample'>"
+		  response.write "<tr class='syntax-sample' id='" & SyntaxInfo(count)(0) & "'>"
 		  response.write "<td class='left'>实例</td>"
 		  response.write "<td>" & "</td>"
 		  response.write "</tr>"
