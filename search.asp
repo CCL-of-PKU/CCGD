@@ -48,7 +48,7 @@ response.write "</div>"
 			Dim i, ElementsInOneLine, j, k
 			i = 0
 			j = 1
-			ElementsInOneLine = 5 ' 每行显示特征个数 
+			ElementsInOneLine = 4 ' 每行显示特征个数 
 		    while i <= ubound(FEATURE_VALUE_ARRAY) 
 				if j >=  ElementsInOneLine then
 					k = j mod ElementsInOneLine
