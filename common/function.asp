@@ -319,10 +319,14 @@ function get_relations(rel_type, cxn, rs, Conn)
 	query = "SELECT * FROM construction WHERE " & rel_type & " = '" & cxn & "'"
 	rs.open query, Conn, 1, 1
 	
-    While not rs.EOF
-      rels = rels & "|" & rs("form")
-      rs.MoveNext
-    Wend
+	if rs.RecordCount = 1 then
+		rels = rs("form")
+	else
+		While not rs.EOF
+			rels = rels & "|" & rs("form")
+			rs.MoveNext
+		Wend
+	end if
 
 	rs.close
 	get_relations = rels
