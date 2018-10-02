@@ -316,7 +316,7 @@ end function
 ' 获取构式关系信息 by Hybin 2018-09-23
 function get_relations(rel_type, cxn, rs, Conn)
 	Dim rels
-	query = "SELECT * FROM construction WHERE" & rel_type & " = " & cxn
+	query = "SELECT * FROM construction WHERE" & rel_type & " = '" & cxn & "'"
 	rs.open query, Conn, 1, 1
 	
     While not rs.EOF
