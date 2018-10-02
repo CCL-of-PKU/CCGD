@@ -11,7 +11,7 @@ $(document).ready(function () {
 		window.history.back();
 	});
 
-	$('td.syntax-func').click(function () {
+	$('tr.syntax-func').click(function () {
 		if ($('tr.syntax-sample').css('display') == 'none')
 			$('tr.syntax-sample').show();
 		else
