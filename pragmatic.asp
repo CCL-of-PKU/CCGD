@@ -11,11 +11,12 @@ dim id
 id = request("id")
 page = request("page")
 
-dim FormInfo(4)
+dim FormInfo(5)
 FormInfo(0) = Array("construction_id", "Construction ID", "hidden", id, "num", "")
 FormInfo(1) = Array("emotional", "感情色彩", "textarea", "", "", "先作概括说明，如需作解释性说明，补充详细的解释以及示例说明内容，并用 <strong>#...#</strong> 加以标记。")
 FormInfo(2) = Array("stylistic", "语体色彩", "textarea", "", "", "先作概括说明，如需作解释性说明，补充详细的解释以及示例说明内容，并用 <strong>#...#</strong> 加以标记。")
 FormInfo(3) = Array("field", "领域限制", "textarea", "", "", "先作概括说明，如需作解释性说明，补充详细的解释以及示例说明内容，并用 <strong>#...#</strong> 加以标记。")
+FormInfo(4) = Array("context", "上下文环境", "textarea", "", "", "先作概括说明，如需作解释性说明，补充详细的解释以及示例说明内容，并用 <strong>#...#</strong> 加以标记。")
 
 TableName = "pragmatic"
 %>
