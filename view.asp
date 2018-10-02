@@ -510,7 +510,7 @@ sub showDetail
           response.write "</tr>"
 		  response.write "<tr class='syntax-sample' id='" & SyntaxInfo(count)(0) & "'>"
 		  response.write "<td class='left'>实例</td>"
-		  response.write "<td>" & "</td>"
+		  response.write "<td>" & rs(SyntaxInfo(count)(0) & "_sample") & "</td>"
 		  response.write "</tr>"
         'end if
         count = count + 1
