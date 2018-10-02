@@ -13,10 +13,10 @@ page = request("page")
 
 dim FormInfo(5)
 FormInfo(0) = Array("construction_id", "Construction ID", "hidden", id, "num", "")
-FormInfo(1) = Array("literal_meaning", "字面义", "textarea", "", "", "")
-FormInfo(2) = Array("implication", "言外之意", "textarea", "", "", "")
-FormInfo(3) = Array("presupposition", "预设", "textarea", "", "", "")
-FormInfo(4) = Array("entailment", "蕴含", "textarea", "", "", "")
+FormInfo(1) = Array("literal_meaning", "字面义", "textarea", "", "", "先作概括说明，如需作解释性说明，补充详细的解释以及示例说明内容，并用 <strong>#...#</strong> 加以标记。")
+FormInfo(2) = Array("implication", "言外之意", "textarea", "", "", "先作概括说明，如需作解释性说明，补充详细的解释以及示例说明内容，并用 <strong>#...#</strong> 加以标记。")
+FormInfo(3) = Array("presupposition", "预设", "textarea", "", "", "先作概括说明，如需作解释性说明，补充详细的解释以及示例说明内容，并用 <strong>#...#</strong> 加以标记。")
+FormInfo(4) = Array("entailment", "蕴含", "textarea", "", "", "先作概括说明，如需作解释性说明，补充详细的解释以及示例说明内容，并用 <strong>#...#</strong> 加以标记。")
 
 TableName = "semantic"
 %>
