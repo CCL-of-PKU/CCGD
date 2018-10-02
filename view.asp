@@ -492,6 +492,8 @@ sub showDetail
   SyntaxInfo(12) = Array("joint_consequent", "联合结构后项")
   SyntaxInfo(13) = Array("lianwei_preceding", "连谓结构前项")
   SyntaxInfo(14) = Array("lianwei_consequent", "连谓结构后项")
+  SyntaxInfo(15) = Array("be_sentence", "是否独立成句")
+  SyntaxInfo(16) = Array("bound", "是否能自由使用")
   %>
   <div id="syntax-info" class="accordion-body collapse">
   <div class="accordion-inner">
