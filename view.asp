@@ -476,7 +476,7 @@ sub showDetail
   </h2>
   </div>
   <%
-  dim SyntaxInfo(15)
+  dim SyntaxInfo(17)
   SyntaxInfo(0) = Array("as_subject", "是否做主语")
   SyntaxInfo(1) = Array("as_predicate", "是否做谓语")
   SyntaxInfo(2) = Array("as_object", "是否作宾语")
