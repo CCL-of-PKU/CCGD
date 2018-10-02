@@ -455,7 +455,7 @@ function do_insert(form_info, table_name)
 	  Conn.Execute sql
 
 	  '更新构式关系 Hybin 2018-09-23
-	  Conn.Execute("UPDATE construction SET synonymous = " & synonymous & ", antonym = " & antonym & ", hypernym = " & hypernym & ", hyponym = " & hyponym " WHERE form = " & request.form("form"))
+	  Conn.Execute("UPDATE construction SET synonymous = " & synonymous & ", antonym = " & antonym & ", hypernym = " & hypernym & ", hyponym = " & hyponym & " WHERE form = " & request.form("form"))
 
 	  if table_name = "construction" then
 		session("construction") = request.form("form")
