@@ -11,7 +11,7 @@ dim id
 id = request("id")
 page = request("page")
 
-dim FormInfo(31)
+dim FormInfo(35)
 FormInfo(0) = Array("construction_id", "Construction ID", "hidden", id, "num", "")
 FormInfo(1) = Array("as_subject", "是否做主语", "select", "", "yesno", "")
 FormInfo(2) = Array("as_subject_sample", "实例", "text", "", "", "")
@@ -43,6 +43,10 @@ FormInfo(27) = Array("lianwei_preceding", "连谓结构前项", "select", "", "y
 FormInfo(28) = Array("lianwei_preceding_sample", "实例", "text", "", "", "")
 FormInfo(29) = Array("lianwei_consequent", "连谓结构后项", "select", "", "yesno", "")
 FormInfo(30) = Array("lianwei_consequent_sample", "实例", "text", "", "", "")
+FormInfo(31) = Array("be_sentence", "是否独立成句", "select", "", "yesno", "")
+FormInfo(32) = Array("be_sentence_sample", "实例", "text", "", "", "")
+FormInfo(33) = Array("bound", "是否能自由使用", "select", "", "yesno", "")
+FormInfo(34) = Array("bound_sample", "实例", "text", "", "", "")
 
 TableName = "syntax"
 %>
