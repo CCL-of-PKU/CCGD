@@ -345,6 +345,11 @@ function do_insert(form_info, table_name)
         end if
     end if
 
+	if (Construction_Form_Checked = false) then
+		dim script = "<script type='text/vbscript>choice = MsgBox('检测到存在形式及义项相同的构式，是否继续添加?', 1, '提示')</script>"
+		ClientScript.ClientScript.RegisterOnSubmitStatement(Me.GetType(), "preadd", script)
+	end if
+
     if (Construction_Form_Checked = true) or (choice = 6) then
 	     sql = "INSERT INTO " & table_name & " ( "
 	     values = "VALUES ( "
