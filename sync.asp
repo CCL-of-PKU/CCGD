@@ -45,6 +45,7 @@ sub sync
 		hypernym = get_relation("hyponym", rs("form")) 
 		
 		Conn.Execute("UPDATE construction SET synonymous = '" & synonymous & "', antonym = '" & antonym & "', hypernym = '" & hypernym & "', hyponym = '" & hyponym & "' WHERE form = '" & rs("form") & "'")
+		rs.Movenext
 	wend
 
   rs.close
