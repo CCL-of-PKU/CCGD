@@ -70,7 +70,7 @@ end sub
 %>
 
 <div class="content">
-	<h2>同步</h2>
+	<h2>同步(除非你知道自己在做什么，否则千万不要点击同步按钮）</h2>
 	<form class="form-horizontal" method="post" action="sync.asp">
 		<input type="hidden" name="action" value="do" />
 		<button type="submit" class="btn">同步</button>
