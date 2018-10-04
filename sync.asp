@@ -34,7 +34,7 @@ function get_relation(rel_type, cxn)
 end function
 
 function getVal(rs, rels, rel_type)
-	if (Len(rs(rel_type) <> 0) then
+	if (Len(rs(rel_type) <> 0)) then
 		getVal = rels & "|" & rs(rel_type)
 	else
 		getVal= rs(rel_type)
