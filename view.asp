@@ -726,7 +726,7 @@ sub showDetail
 <%
 sub delete
   '跳转页面修复，by Dreamer on 2015-01-28
-  url = Replace(request.querystring,"%","%25")
+  'url = Replace(request.querystring,"%","%25")
   url = Replace(url,"+","%2B")
   urlmark=InStr(url,"&id=")
   urlmark2=InStr(urlmark+1,url,"&")
