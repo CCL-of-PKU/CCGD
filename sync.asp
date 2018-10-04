@@ -35,7 +35,7 @@ end function
 
 function getVal(rs, rels, rel_type)
 	if (Len(rs(rel_type)) <> 0) then
-		getVal = Left(rels & "|" & rs(rel_type), 1)
+		getVal = Mid(rels & "|" & rs(rel_type), 2)
 	else
 		getVal= rs(rel_type)
 	end if
