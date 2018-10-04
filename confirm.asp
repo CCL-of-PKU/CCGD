@@ -33,7 +33,7 @@ end if
 
 <div class="content">
 	<h2>提示</h2>
-	<p>检测到存在形式及义项相同的构式，确认是否继续添加？</p>
+	<p id="confirm">检测到存在形式及义项相同的构式，确认是否继续添加？</p>
 	<div class="confirm-button">
 		<a href="confirm.asp?action=delete&id=<%=id%>" id="confirm-back">返回</a>
 		<a href="confirm.asp?action=continue&id=<%=id%>" id="confirm-go">继续</a>

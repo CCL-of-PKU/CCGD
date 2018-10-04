@@ -122,6 +122,23 @@ div#syntax-info tr.syntax-sample {
 	display: none;
 }
 
+p#confirm {
+	font-size: 1.2em;
+}
+
+div.confirm-button a {
+	text-decoration: none;
+	border: solid 1px rgb(17, 134, 204);
+	border-radius: 2.5px;
+	padding: 0.5em 1.5em;
+	margin-right: 1em;
+}
+
+a#confirm-back {
+	color: white;
+	background-color: rgb(17, 134, 204);
+}
+
 .footer p {
     text-align:right;
 }
