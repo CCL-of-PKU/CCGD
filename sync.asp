@@ -53,10 +53,11 @@ sub sync
 		hypernym = getVal(rs, get_relation("hyponym", rs("form"), "hyponym"))
 		
 		Conn.Execute("UPDATE construction SET synonymous = '" & synonymous & "', antonym = '" & antonym & "', hypernym = '" & hypernym & "', hyponym = '" & hyponym & "' WHERE form = '" & rs("form") & "'")
-		rs.Movenext
+		rs.MoveNext
 	wend
 
-  rs.close
+	response.write "总计同步" & rs.RecordCount & "条记录"
+	rs.close
 end sub	
 %>
 
