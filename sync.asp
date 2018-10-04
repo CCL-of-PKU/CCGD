@@ -34,10 +34,18 @@ function get_relation(rel_type, cxn)
 end function
 
 function getVal(rs, rels, rel_type)
+	dim value
+
 	if (Len(rs(rel_type)) <> 0) then
-		getVal = Mid(rels & "|" & rs(rel_type), 2)
+		value = rels & "|" & rs(rel_type)
 	else
-		getVal= rs(rel_type)
+		value = rs(rel_type)
+	end if
+	
+	if (Left(value, 1) = "|") then
+		getVal = Mid(value, 2)
+	else
+		getVal = value
 	end if
 end function
 
