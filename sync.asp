@@ -33,16 +33,24 @@ function get_relation(rel_type, cxn)
   end if
 end function
 
+function getVal(rs, rels, rel_type)
+	if (Len(rs(rel_type) <> 0) then
+		getVal = rels & "|" & rs(rel_type)
+	else
+		getVal= rs(rel_type)
+	end if
+end function
+
 sub sync
 	query = "SELECT * FROM construction WHERE deleted = null"
 	Set rs = Server.CreateObject("adodb.recordset")
 	rs.open query, Conn, 1, 1
 	
 	while not rs.EOF
-		synonymous = get_relation("synonymous", rs("form"))
-		antonym = get_relation("antonym", rs("form"))
-		hyponym = get_relation("hypernym", rs("form"))
-		hypernym = get_relation("hyponym", rs("form")) 
+		synonymous = getVal(rs, get_relation("synonymous", rs("form"), "synonymous")
+		antonym = getVal(rs, get_relation("antonym", rs("form"), "antonym")
+		hyponym = getVal(rs, get_relation("hypernym", rs("form"), "hypernym")
+		hypernym = getVal(rs, get_relation("hyponym", rs("form"), "hyponym") 
 		
 		Conn.Execute("UPDATE construction SET synonymous = '" & synonymous & "', antonym = '" & antonym & "', hypernym = '" & hypernym & "', hyponym = '" & hyponym & "' WHERE form = '" & rs("form") & "'")
 		rs.Movenext
