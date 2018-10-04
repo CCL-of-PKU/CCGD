@@ -15,7 +15,7 @@ end if
 
 function get_relation(rel_type, cxn)
 	Dim rels
-	query = "SELECT * FROM construction WHERE deleted = null AND " & rel_type & " = '" & cxn & "'"
+	query = "SELECT * FROM construction WHERE deleted is null AND " & rel_type & " = '" & cxn & "'"
 	Set rs = Server.CreateObject("adodb.recordset")
 	rs.open query, Conn, 1, 1
 
