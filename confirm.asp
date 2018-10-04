@@ -13,7 +13,7 @@ dim id
 id = request.QueryString("id")
 
 sub delete
-	Conn.Execute("DELETE FROM construction WHERE id = '" & id & "'")
+	Conn.Execute("DELETE FROM construction WHERE id = " & id)
 	
 	Response.redirect "base.asp?action=add&"
 end sub
