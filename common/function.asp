@@ -347,7 +347,7 @@ function do_insert(form_info, table_name)
 
 	if (Construction_Form_Checked = false) then
 		dim script 
-		script = "<script type='text/vbscript>sub confirm() choice = MsgBox('检测到存在形式及义项相同的构式，是否继续添加?', 1, '提示') end sub</script>"
+		script = "<script type='text/vbscript>choice = MsgBox('检测到存在形式及义项相同的构式，是否继续添加?', 1, '提示')</script>"
 		ClientScript.ClientScript.RegisterOnSubmitStatement(Me.GetType(), "preadd", script)
 	end if
 
