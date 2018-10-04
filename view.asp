@@ -747,7 +747,7 @@ sub delete
   Conn.Execute "UPDATE construction SET deleted = 'Y' WHERE ID = " & request.QueryString("id")
   'call showList(0)
   'response.write "<script>alert('条目已删除！');window.location='search.asp?action=do" & urlparam & "'</script>;"
-  response.write "<script>alert('条目已删除！');window.location='search.asp?action=do&cons_form='" & request.QueryString("cons_form") & "'</script>;"
+  response.write "<script>alert('条目已删除！');window.location='search.asp?action=do&cons_form='" & request.QueryString("cons_form") & "';</script>"
 end sub
 %>
 
