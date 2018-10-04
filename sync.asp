@@ -47,10 +47,10 @@ sub sync
 	rs.open query, Conn, 1, 1
 	
 	while not rs.EOF
-		synonymous = getVal(rs, get_relation("synonymous", rs("form"), "synonymous")
-		antonym = getVal(rs, get_relation("antonym", rs("form"), "antonym")
-		hyponym = getVal(rs, get_relation("hypernym", rs("form"), "hypernym")
-		hypernym = getVal(rs, get_relation("hyponym", rs("form"), "hyponym") 
+		synonymous = getVal(rs, get_relation("synonymous", rs("form"), "synonymous"))
+		antonym = getVal(rs, get_relation("antonym", rs("form"), "antonym"))
+		hyponym = getVal(rs, get_relation("hypernym", rs("form"), "hypernym"))
+		hypernym = getVal(rs, get_relation("hyponym", rs("form"), "hyponym"))
 		
 		Conn.Execute("UPDATE construction SET synonymous = '" & synonymous & "', antonym = '" & antonym & "', hypernym = '" & hypernym & "', hyponym = '" & hyponym & "' WHERE form = '" & rs("form") & "'")
 		rs.Movenext
