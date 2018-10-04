@@ -727,14 +727,14 @@ sub showDetail
 sub delete
   '跳转页面修复，by Dreamer on 2015-01-28
   'url = Replace(request.querystring,"%","%25")
-  url = Replace(url,"+","%2B")
-  urlmark=InStr(url,"&id=")
-  urlmark2=InStr(urlmark+1,url,"&")
-  If urlmark2 > 0 Then
-    urlparam = Mid(url,urlmark2)
-  Else
-    urlparam = ""
-  End If
+  'url = Replace(url,"+","%2B")
+  'urlmark=InStr(url,"&id=")
+  'urlmark2=InStr(urlmark+1,url,"&")
+  'If urlmark2 > 0 Then
+    'urlparam = Mid(url,urlmark2)
+  'Else
+    'urlparam = ""
+  'End If
   'End 跳转页面修复
 
   'Conn.Execute "DELETE FROM construction WHERE ID=" & request.QueryString("id")
@@ -746,7 +746,8 @@ sub delete
   'Conn.Execute "DELETE FROM syntax WHERE construction_id=" & request.QueryString("id")
   Conn.Execute "UPDATE construction SET deleted = 'Y' WHERE ID = " & request.QueryString("id")
   'call showList(0)
-  response.write "<script>alert('条目已删除！');window.location='search.asp?action=do" & urlparam & "'</script>;"
+  'response.write "<script>alert('条目已删除！');window.location='search.asp?action=do" & urlparam & "'</script>;"
+  response.write "<script>alert('条目已删除！');window.location='search.asp?action=do&cons_form='" & request.QueryString("cons_form") & "'</script>;"
 end sub
 %>
 
