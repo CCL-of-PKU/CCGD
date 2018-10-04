@@ -27,9 +27,9 @@ function get_relation(rel_type, cxn)
 	rs.close
 
   if (Len(rels) > 0) then
-	  get_relations = Left(rels, Len(rels) - 1)
+	  get_relation = Left(rels, Len(rels) - 1)
   else
-    get_relations = rels
+    get_relation = rels
   end if
 end function
 
