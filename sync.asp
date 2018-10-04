@@ -42,7 +42,7 @@ function getVal(rs, rels, rel_type)
 end function
 
 sub sync
-	query = "SELECT * FROM construction WHERE deleted = null"
+	query = "SELECT * FROM construction WHERE deleted is null"
 	Set rs = Server.CreateObject("adodb.recordset")
 	rs.open query, Conn, 1, 1
 	
