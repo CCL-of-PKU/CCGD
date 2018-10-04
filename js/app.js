@@ -8,8 +8,10 @@
 
 $(document).ready(function () {
 	// 详细页面返回上层
+	let prev = document.referer;
 	$('a.back-to-list').click(function () {
-		window.history.back();
+		// window.history.back();
+		alert(prev);
 	});
 
 	// 显示或隐藏句法信息中的实例
