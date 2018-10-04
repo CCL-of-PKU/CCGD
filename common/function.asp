@@ -319,24 +319,25 @@ function get_relations(rel_type, cxn, rs, Conn)
 	Dim rels
 	query = "SELECT * FROM construction WHERE " & rel_type & " = '" & cxn & "'"
 	rs.open query, Conn, 1, 1
-	
-	if rs.RecordCount = 1 then
-		rels = rs("form")
-	else
-		While not rs.EOF
-			rels = rels & "|" & rs("form")
-			rs.MoveNext
-		Wend
-	end if
+
+	While not rs.EOF
+		rels = rs("form") & "|" & rels
+		rs.MoveNext
+	Wend
 
 	rs.close
-	get_relations = rels
+
+  if (Len(rels) > 0) then
+	  get_relations = Left(rels, Len(rels) - 1)
+  else
+    get_relations = rels
+  end if
 end function
 	
 function do_insert(form_info, table_name)
 '如果构式形式相同且相同义项编号已经存在，则不能增加新的记录 zwd 2016-10-07
 '只有碰到多义构式时，才需要增加相同的构式形式的记录
-    Dim Construction_Form_Checked, choice
+    Dim Construction_Form_Checked, homonym
     Construction_Form_Checked = True 'The construction added should be a new one
 
     if table_name = "construction" then
@@ -345,22 +346,15 @@ function do_insert(form_info, table_name)
         end if
     end if
 
-	if (Construction_Form_Checked = false) then
-		dim script 
-		script = "<script type='text/vbscript>choice = MsgBox('检测到存在形式及义项相同的构式，是否继续添加?', 1, '提示')</script>"
-		call ClientScript.RegisterOnSubmitStatement(Me.[GetType](), "preadd", script)
-	end if
-
-    if (Construction_Form_Checked = true) then
-	     sql = "INSERT INTO " & table_name & " ( "
-	     values = "VALUES ( "
-	     c_str = ""
-	     v_str = ""
-	     cons_num = 0
-	     vari_num = 0
-         dedup = ""
-	     '增加构式常变项组合提取，by Dreamer on 2014-12-08
-	     If table_name = "construction" Then
+	sql = "INSERT INTO " & table_name & " ( "
+	values = "VALUES ( "
+	c_str = ""
+	v_str = ""
+	cons_num = 0
+	vari_num = 0
+    dedup = ""
+	'增加构式常变项组合提取，by Dreamer on 2014-12-08
+	If table_name = "construction" Then
 		'提取下一个ID
 		newsql = "select top 1 ID from construction order by ID desc"
 		Set rs = Server.CreateObject("adodb.recordset")
@@ -374,109 +368,112 @@ function do_insert(form_info, table_name)
 		items = Split(construct,"+")
 		count_pos = 1
 		For i = 0 To ubound(items)
-		  If items(i) = "" Then
-			continue
-		  ElseIf Left(items(i),1) >= "A" And Left(items(i),1) <= "z" Then '变项
-			conn.execute("INSERT INTO variable (construction_id,position,vstring) VALUES (" & CStr(cid) & "," & CStr(count_pos) & ",'" & items(i) & "')")
-			v_str = v_str & items(i) & " "
-			vari_num = vari_num + 1
-			count_pos = count_pos + 1
-                                                dedup = dedup & items(i)
-		  Else        
-			newsql = "select cat, py from syndict where lex = '" & items(i) & "'"
-			rs.open newsql,Conn,1,1
-			If rs.RecordCount Then
-			  conn.execute("INSERT INTO constant (construction_id,position,cstring,py,pos) VALUES (" & CStr(cid) & "," & CStr(count_pos) & ",'" & items(i) & "','" & rs("py") & "','" & rs("cat") & "')")
-			Else
-			  conn.execute("INSERT INTO constant (construction_id,position,cstring) VALUES (" & CStr(cid) & "," & CStr(count_pos) & ",'" & items(i) & "')")
+		    If items(i) = "" Then
+			    continue
+		    ElseIf Left(items(i),1) >= "A" And Left(items(i),1) <= "z" Then '变项
+			    conn.execute("INSERT INTO variable (construction_id,position,vstring) VALUES (" & CStr(cid) & "," & CStr(count_pos) & ",'" & items(i) & "')")
+			    v_str = v_str & items(i) & " "
+			    vari_num = vari_num + 1
+			    count_pos = count_pos + 1
+				dedup = dedup & items(i)
+		    Else        
+			    newsql = "select cat, py from syndict where lex = '" & items(i) & "'"
+			    rs.open newsql,Conn,1,1
+			    If rs.RecordCount Then
+					conn.execute("INSERT INTO constant (construction_id,position,cstring,py,pos) VALUES (" & CStr(cid) & "," & CStr(count_pos) & ",'" & items(i) & "','" & rs("py") & "','" & rs("cat") & "')")
+			    Else
+					conn.execute("INSERT INTO constant (construction_id,position,cstring) VALUES (" & CStr(cid) & "," & CStr(count_pos) & ",'" & items(i) & "')")
+			    End If
+
+			    rs.close
+			    c_str = c_str & items(i) & " "
+			    cons_num = cons_num + 1
+			    count_pos = count_pos + 1
+				dedup = dedup & items(i)
 			End If
-			rs.close
-			c_str = c_str & items(i) & " "
-			cons_num = cons_num + 1
-			count_pos = count_pos + 1
-                                                dedup = dedup & items(i)
-		  End If
 		Next
+
 		If v_str <> "" Then
-		v_str = Left(v_str,Len(v_str)-1)
+		    v_str = Left(v_str,Len(v_str)-1)
 		End If
 		If c_str <> "" Then
-		  c_str = Left(c_str,Len(c_str)-1)
+		    c_str = Left(c_str,Len(c_str)-1)
 		End If
-	  End If
-	  'End 增加构式常变项组合提取
-	  
-	  '保存构式变体（不含+号）by Hybin on 2018-09-22
-	  dim dealter
-	  alter = Replace(request.form("alter"), "，", "+")
-	  alter = Replace(alter, ",", "+")
-	  aitems = Split(alter, "+")
-	  For Each ai in aitems
-		dealter = dealter & ai
-	  Next
+	End If
+	'End 增加构式常变项组合提取
 
-	  count = 0
-	  while count < ubound(form_info)
+    '查找同形构式 by Hybin on 2018-10-03
+    if (Construction_Form_Checked = false) then
+		homonym = getIDofExistedForm(request.form("form"),request.form("yixiang"))
+    else
+		homonym = "0"
+    end if
+	  
+	'保存构式变体（不含+号）by Hybin on 2018-09-22
+	dim dealter
+	alter = Replace(request.form("alter"), "，", "+")
+	alter = Replace(alter, ",", "+")
+	aitems = Split(alter, "+")
+	For Each ai in aitems
+		dealter = dealter & ai
+	Next
+
+	count = 0
+	while count < ubound(form_info)
 		if count = ubound(form_info) -1 then
-		  sql = sql & form_info(count)(0)
+			sql = sql & form_info(count)(0)
 		else
-		  sql = sql & form_info(count)(0) & ", "
+			sql = sql & form_info(count)(0) & ", "
 		end if
 		
 		If form_info(count)(0) = "constants" Then
-		  values = values & CStr(cons_num) & ","
+			values = values & CStr(cons_num) & ","
 		ElseIf form_info(count)(0) = "variables" Then
-		  values = values & CStr(vari_num) & ","
+			values = values & CStr(vari_num) & ","
 		Elseif form_info(count)(4) = "num" or form_info(count)(4) = "id" then
-		  value = request.form(form_info(count)(0))
-		  if isStrEmpty(value) then
-			value = "0"
-		  end if
-		  if count = ubound(form_info) -1 then
-			values = values & value
-		  else
-			values = values & value & ","
-		  end if
+			value = request.form(form_info(count)(0))
+			if isStrEmpty(value) then
+				value = "0"
+			end if
+			if count = ubound(form_info) -1 then
+				values = values & value
+			else
+				values = values & value & ","
+			end if
 		Else
-		  value = request.form(form_info(count)(0))
-		  if form_info(count)(0) = "feature" then
-			value = Replace(value,", ","|")
-		  end if
-		  if count = ubound(form_info) -1 then
-			values = values & "'" & value & "'"
-		  else
-			values = values & "'" & value & "',"
-		  end If      
+			value = request.form(form_info(count)(0))
+			if form_info(count)(0) = "feature" then
+				value = Replace(value,", ","|")
+			end if
+			if count = ubound(form_info) -1 then
+				values = values & "'" & value & "'"
+			else
+				values = values & "'" & value & "',"
+			end If      
 		End If
 		count = count + 1
-	  Wend
-	  '自动查找构式关系信息 by Hybin on 2018-09-23
-	  synonymous = get_relations("synonymous", request.form("form"), rs, Conn)
-	  antonym = get_relations("antonym", request.form("form"), rs, Conn)
-	  hyponym = get_relations("hypernym", request.form("form"), rs, Conn)
-	  hypernym = get_relations("hyponym", request.form("form"), rs, Conn) 
+	Wend
+	'自动查找构式关系信息 by Hybin on 2018-09-23
+	synonymous = get_relations("synonymous", request.form("form"), rs, Conn)
+	antonym = get_relations("antonym", request.form("form"), rs, Conn)
+	hyponym = get_relations("hypernym", request.form("form"), rs, Conn)
+	hypernym = get_relations("hyponym", request.form("form"), rs, Conn) 
 	  
-	  '增加构式常变项组合提取，by Dreamer on 2014-12-08
-	  If table_name = "construction" Then
-		sql = sql & ", cstr, vstr, form2, alter2"
-		values = values & ",'" & c_str & "','" & v_str & "','" & dedup & "','" & dealter & "'"
-	  End If
+	'增加构式常变项组合提取，by Dreamer on 2014-12-08
+	If table_name = "construction" Then
+		sql = sql & ", cstr, vstr, form2, alter2, homonym"
+		values = values & ",'" & c_str & "','" & v_str & "','" & dedup & "','" & dealter & "','" & homonym & "'"
+	End If
 
-	  sql = sql & ") " & values & ")"
-	  Conn.Execute sql
+	sql = sql & ") " & values & ")"
+	Conn.Execute sql
 
-	  '更新构式关系 Hybin 2018-09-23
-	  Conn.Execute("UPDATE construction SET synonymous = '" & synonymous & "', antonym = '" & antonym & "', hypernym = '" & hypernym & "', hyponym = '" & hyponym & "' WHERE form = '" & request.form("form") & "'")
+	'更新构式关系 Hybin 2018-09-23
+	Conn.Execute("UPDATE construction SET synonymous = '" & synonymous & "', antonym = '" & antonym & "', hypernym = '" & hypernym & "', hyponym = '" & hyponym & "' WHERE form = '" & request.form("form") & "'")
 
-	  if table_name = "construction" then
+	if table_name = "construction" then
 		session("construction") = request.form("form")
-	  end if
-    else
-		response.write choice & "<br>"
-        response.write "相同构式形式及义项编号记录已经存在，页面将在3秒后返回上一页<br>"
-        response.write "<Script language='Javascript'>setTimeout('history.go(-1)',3000)</Script>"
-        response.end
-    end if
+	end if
 end function
 
 '-------------------------------
@@ -676,6 +673,19 @@ function getLastConstructionID()
   set rs = nothing
 end function
 
+'----------------------------------------
+' get the last construction hononym that added
+'----------------------------------------
+function getLastConstructionHomonym()
+  sql = "SELECT top 1 homonym FROM construction WHERE username='" & session("username") & "' ORDER BY ID desc"
+  set rs = Server.CreateObject("adodb.recordset")
+  rs.CursorLocation = 2
+  rs.open sql,Conn,1,1
+
+  getLastConstructionHomonym = rs("homonym")
+  rs.close   ' zwd 2016-06-22
+  set rs = nothing
+end function
 
 '----------------------------------------
 ' get user id by username
@@ -984,5 +994,26 @@ function isExistedForm(str,sense)
 	end if
 	
 	rs.close
+end function
+
+'------------------------------------------
+' 获取同形构式构式的编号 by Hybin on 2018-10-03
+'------------------------------------------
+function getIDofExistedForm(str, sense)
+  Dim dedup, indice
+	dedup = Replace(str, "+", "")
+
+	the_sql = "select ID from construction where form2 = '" & dedup & "' AND yixiang = " & sense & " AND deleted is null"
+	Set rs = Server.CreateObject("adodb.recordset")
+	rs.open the_sql, Conn, 1, 1
+	
+  while not rs.EOF
+    indice = rs("id") & ", " & indice
+    rs.MoveNext
+  wend
+
+  rs.close
+
+  getIDofExistedForm = Left(indice, Len(indice) - 1)
 end function
 %>

@@ -167,9 +167,15 @@ end sub
 
 sub doAdd
 	call do_insert(FormInfo, TableName)
+	lastHomonym = getLastConstructionHomonym
 	LastID = getLastConstructionID
-	call do_insert_all(LastID)
-	response.redirect "view.asp?action=detail&id=" & LastID
+	
+	if (lastHomonym <> "0") then
+		response.redirect "confirm.asp?id=" & LastID
+	else
+		call do_insert_all(LastID)
+		response.redirect "view.asp?action=detail&id=" & LastID
+	end if
 end sub 
 
 sub doEdit
