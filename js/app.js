@@ -10,8 +10,10 @@ $(document).ready(function () {
 	// 详细页面返回上层
 	let prev = document.referrer;
 	$('a.back-to-list').click(function () {
-		// window.history.back();
-		alert(prev);
+		if (prev.match('confirm') == 'confirm')
+			$(this).attr('href', 'view.asp');
+		else
+			window.history.back();
 	});
 
 	// 显示或隐藏句法信息中的实例
