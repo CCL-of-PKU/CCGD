@@ -8,7 +8,7 @@
 
 $(document).ready(function () {
 	// 详细页面返回上层
-	let prev = document.referer;
+	let prev = document.referrer;
 	$('a.back-to-list').click(function () {
 		// window.history.back();
 		alert(prev);
