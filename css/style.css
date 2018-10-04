@@ -124,6 +124,7 @@ div#syntax-info tr.syntax-sample {
 
 p#confirm {
 	font-size: 1.2em;
+	margin: 2em 0;
 }
 
 div.confirm-button a {
