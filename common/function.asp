@@ -346,11 +346,11 @@ function do_insert(form_info, table_name)
     end if
 
 	if (Construction_Form_Checked = false) then
-		dim script = "<script type='text/vbscript>choice = MsgBox('检测到存在形式及义项相同的构式，是否继续添加?', 1, '提示')</script>"
+		dim script = "<script type='text/vbscript>sub confirm() choice = MsgBox('检测到存在形式及义项相同的构式，是否继续添加?', 1, '提示') end sub</script>"
 		ClientScript.ClientScript.RegisterOnSubmitStatement(Me.GetType(), "preadd", script)
 	end if
 
-    if (Construction_Form_Checked = true) or (choice = 6) then
+    if (Construction_Form_Checked = true) then
 	     sql = "INSERT INTO " & table_name & " ( "
 	     values = "VALUES ( "
 	     c_str = ""
@@ -471,6 +471,7 @@ function do_insert(form_info, table_name)
 		session("construction") = request.form("form")
 	  end if
     else
+		response.write choice & "<br>"
         response.write "相同构式形式及义项编号记录已经存在，页面将在3秒后返回上一页<br>"
         response.write "<Script language='Javascript'>setTimeout('history.go(-1)',3000)</Script>"
         response.end
