@@ -32,12 +32,4 @@ $(document).ready(function () {
 		$('label.control-label#' + attr + '_sample').hide();
 	})
 
-	let syntaxSubgroup = ['joint_preceding', 'joint_consequent', 'lianwei_preceding', 
-						   'lianwei_consequent', 'be_sentence'];
-
-	syntaxSubgroup.forEach(function(attr) {
-		$('input#' + attr + '_sample').css('left', '15.45%');
-	});
-
-	$('input#bound_sample').css('left', '13.5%');
 })
