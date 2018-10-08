@@ -107,6 +107,15 @@ response.write "</div>"
 	      <input type="text" class="span1" name="constant_num_max" />
 	    </div>
 	  </div>
+	  <!--增加构式义项查询，by Hybin on 2014-11-30-->
+	  <div class="control-group">
+	    <label class="control-label">构式义项</label>
+	    <div class="controls">
+		  <input type="checkbox" value="0" name="monosemy">单义构式
+		  <input type="checkbox" value="1" name="polysemy">多义构式
+	    </div>
+	  </div>
+	  <!--end-->
 	  <!--增加排序方式，by Dreamer on 2014-11-30-->
 	  <div class="control-group">
 	    <label class="control-label">排序方式</label>
