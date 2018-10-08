@@ -111,7 +111,7 @@ response.write "</div>"
 	  <div class="control-group">
 	    <label class="control-label">构式义项</label>
 	    <div class="controls">
-		  <input type="radio" value="0" name="mono-poly">单义构式
+		  <input type="radio" value="0" name="mono-poly" checked>单义构式&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 		  <input type="radio" value="1" name="mono-poly">多义构式
 	    </div>
 	  </div>
