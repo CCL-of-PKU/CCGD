@@ -118,9 +118,6 @@ div#syntax-info td.left {
 	width: 30%;
 }
 
-div#syntax-info tr.syntax-sample {
-	display: none;
-}
 
 p#confirm {
 	font-size: 1.2em;
