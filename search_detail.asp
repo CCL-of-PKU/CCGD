@@ -119,7 +119,7 @@ sub doSearch
 						sql = sql & "AND " & TableInfo(count)(2) & ".ID"  & "=" & word_value & " "
 						'response.write "SQL3=" & sql & "<br>"
 					end if
-					call addItems(conditions, TableInfo(count)(1)(word_num)(1) & ": " & request(word_str))
+					call addItems(conditions, TableInfo(count)(0) & "-" & TableInfo(count)(1)(word_num)(1) & ": " & request(word_str))
 					'修复页面跳转失败问题, by Hybin on 2018-09-21
 					url = url & word_str & "=" & request(word_str) & "&"
 				end if
@@ -137,7 +137,7 @@ sub doSearch
 						sql = sql & "AND " & TableInfo(count)(2) & "." & TableInfo(count)(1)(word_num)(0) & " between " & cint(min_num) & " and " & cint(max_num) & " "
 						'response.write "SQL5=" & sql & "<br>"
 					end if
-					call addItems(conditions, TableInfo(count)(1)(word_num)(1) & ": " & min_num & "~" & max_num)
+					call addItems(conditions, TableInfo(count)(0) & "-" & TableInfo(count)(1)(word_num)(1) & ": " & min_num & "~" & max_num)
 					url = url & min_str & "=" & min_num & "&"
 					url = url & max_str & "=" & max_num & "&"
 				end if
