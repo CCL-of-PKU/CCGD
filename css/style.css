@@ -115,7 +115,19 @@ a.back-to-list {
 }
 
 div#syntax-info td.left {
-	width: 30%;
+	width: 15%;
+}
+
+div#syntax-info td.middle-left {
+	width: 15%;
+}
+
+div#syntax-info td.middle-right {
+	width: 10%;
+}
+
+div#syntax-info td.right {
+	width: 60%;
 }
 
 

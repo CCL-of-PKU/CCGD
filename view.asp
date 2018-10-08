@@ -506,10 +506,10 @@ sub showDetail
         'if not isStrEmpty(rs(SyntaxInfo(count)(0))) then
           response.write "<tr class='syntax-func' id='" & SyntaxInfo(count)(0) & "'>"
           response.write "<td class='left'>" & SyntaxInfo(count)(1) & "</td>"
-          response.write "<td>" & rs(SyntaxInfo(count)(0)) & "</td>"
+          response.write "<td class='middle-left'>" & rs(SyntaxInfo(count)(0)) & "</td>"
 		'增加句法信息实例显示 by Hybin on 2018-09-25
-		  response.write "<td class='left'>实例</td>"
-		  response.write "<td>" & rs(SyntaxInfo(count)(0) & "_sample") & "</td>"
+		  response.write "<td class='middle-right'>实例</td>"
+		  response.write "<td class='right'>" & rs(SyntaxInfo(count)(0) & "_sample") & "</td>"
           response.write "</tr>"
 		'  response.write "<tr class='syntax-sample' id='" & SyntaxInfo(count)(0) & "'>"
 		'  response.write "</tr>"
