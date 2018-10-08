@@ -67,7 +67,7 @@ SemanticInfo(2) = Array("presupposition", "预设", "text", "text")
 SemanticInfo(3) = Array("entailment", "蕴含", "text", "text")
 
 ' 语用信息：Pragmatic
-dim PragmaticInfo(3)
+dim PragmaticInfo(4)
 PragmaticInfo(0) = Array("emotional", "感情色彩", "text", "text")
 PragmaticInfo(1) = Array("stylistic", "语体色彩", "text", "text")
 PragmaticInfo(2) = Array("field", "领域限制", "text", "text")
