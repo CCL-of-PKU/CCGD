@@ -119,15 +119,17 @@ div#syntax-info td.left {
 }
 
 div#syntax-info td.middle-left {
-	width: 15%;
+	width: 10%;
+	text-align: center;
 }
 
 div#syntax-info td.middle-right {
 	width: 10%;
+	text-align: center;
 }
 
 div#syntax-info td.right {
-	width: 60%;
+	width: 65%;
 }
 
 
