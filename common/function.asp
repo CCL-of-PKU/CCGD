@@ -148,7 +148,7 @@ function createForm(form_info)
     if form_info(count)(2) = "hidden" then %>
       <input type="hidden" name="<%=form_info(count)(0)%>" value="<%=form_info(count)(3)%>" />
  <% elseif not ((form_info(count)(0) = "variables" or form_info(count)(0) = "constants") and request("action") = "add") then %>
-      <div class="control-group">
+      <div class="control-group" id="<%=form_info(count)(0)%>">
         <label class="control-label"><%=form_info(count)(1)%></label>
         <div class="controls">
           <% if form_info(count)(2) = "text" then %>
