@@ -16,13 +16,4 @@ $(document).ready(function () {
 			window.history.back();
 	});
 
-	// 显示或隐藏句法信息中的实例
-	$('tr.syntax-func').click(function () {
-		let id = $(this).attr('id');
-
-		if ($('tr.syntax-sample#' + id).css('display') == 'none')
-			$('tr.syntax-sample#' + id).show();
-		else
-			$('tr.syntax-sample#' + id).hide();
-	});
 })

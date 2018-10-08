@@ -152,7 +152,7 @@ function createForm(form_info)
         <label class="control-label"><%=form_info(count)(1)%></label>
         <div class="controls">
           <% if form_info(count)(2) = "text" then %>
-            <input type="text" name="<%=form_info(count)(0)%>" placeholder="请输入<%=form_info(count)(1)%>" class="span8" value="<%=form_info(count)(3)%>" />
+            <input type="text" name="<%=form_info(count)(0)%>" placeholder="请输入<%=form_info(count)(1)%>" class="span8" value="<%=form_info(count)(3)%>" id="<%=form_info(count)(0)%>" />
           <% elseif form_info(count)(2) = "textarea" then %>
             <textarea name="<%=form_info(count)(0)%>" placeholder="请输入<%=form_info(count)(1)%>"  class="span8"><%=form_info(count)(3)%></textarea>
           <% elseif form_info(count)(2) = "multi-select" then %>
