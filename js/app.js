@@ -29,7 +29,7 @@ $(document).ready(function () {
 			'left': '16%'
 		});
 		$('div.control-group#' + attr + '_sample').css('margin-top', '-3.55em');
-		$('label.control-group#' + attr + '_sample').hide();
+		$('label.control-label#' + attr + '_sample').hide();
 	})
 
 	let syntaxSubgroup = ['joint_preceding', 'joint_consequent', 'lianwei_preceding', 
