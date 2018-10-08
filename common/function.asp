@@ -238,7 +238,7 @@ function createForm(form_info)
               </label>                        
           <%End If
           elseif form_info(count)(2) = "select" then %>
-            <select name="<%=form_info(count)(0)%>" class="span8">
+            <select name="<%=form_info(count)(0)%>" class="span8" id="<%=form_info(count)(0)%>">
             <%
             if form_info(count)(4) = "id" then
               sql = "SELECT ID, form FROM construction WHERE deleted is null ORDER BY form"
