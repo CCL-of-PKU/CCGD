@@ -23,7 +23,7 @@ BaseInfo(12) = Array("hypernym", "上位构式", "id","text")
 BaseInfo(13) = Array("hyponym", "下位构式", "id","text")
 
 ' 变项信息表：Variable
-dim VariableInfo(5)
+dim VariableInfo(6)
 VariableInfo(0) = Array("position", "变项序位", "min-max", "num")
 VariableInfo(1) = Array("syn_cat", "句法范畴", "text", "text")
 VariableInfo(2) = Array("sem_cat", "语义范畴", "text", "text")
