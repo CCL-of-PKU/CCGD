@@ -24,11 +24,14 @@ $(document).ready(function () {
 	syntax.forEach(function(attr) {
 		$('select#' + attr).css('width', '15%');
 		$('input#' + attr + '_sample').css({
-			'width': '68.5%',
+			'width': '84.6%',
 			'position': 'relative',
-			'left': '16%'
+			'left': '-4%'
 		});
-		$('div.control-group#' + attr + '_sample').css('margin-top', '-3.55em');
+		$('div.control-group#' + attr + '_sample').css({
+			'margin-top': '-3.55em',
+			'margin-left': '10em',
+		});
 		$('label.control-label#' + attr + '_sample').hide();
 	})
 
