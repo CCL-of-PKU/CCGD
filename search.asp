@@ -111,8 +111,8 @@ response.write "</div>"
 	  <div class="control-group">
 	    <label class="control-label">构式义项</label>
 	    <div class="controls">
-		  <input type="radio" value="0" name="mono-poly" checked>单义构式&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		  <input type="radio" value="1" name="mono-poly">多义构式
+		  <input type="radio" value="monosemy" name="cons_sense" checked>单义构式&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		  <input type="radio" value="polysemy" name="cons_sense">多义构式
 	    </div>
 	  </div>
 	  <!--end-->
@@ -216,7 +216,7 @@ sub doSearch
 	'增加构式义项查询，by Hybin on 2018-10-07
 	if not isStrEmpty(cons_sense) then
 		dim cxn_sense
-		if (cons_sense = 0) then
+		if (cons_sense = "monosemy") then
 			where = where & "AND yixiang = 0 "
 			cxn_sense = "单义构式"
 		else
