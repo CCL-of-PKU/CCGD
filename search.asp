@@ -216,7 +216,7 @@ sub doSearch
 	'增加构式义项查询，by Hybin on 2018-10-07
 	if not isStrEmpty(cons_sense) then
 		dim cxn_sense
-		if (cons_sense = "0") then
+		if (cons_sense = 0) then
 			where = where & "AND yixiang = 0 "
 			cxn_sense = "单义构式"
 		else
