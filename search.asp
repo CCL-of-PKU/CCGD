@@ -175,7 +175,7 @@ sub doSearch
 	cons_form = Replace(request("cons_form"), "+", "")
 	cons_feature = request("cons_feature")	
 	cons_type = request("cons_type")
-	cons_sense = request("mono_poly")
+	cons_sense = request("cons_sense")
 	cons_example = request("cons_example")
 	rank_type = request("rank_type")
 	rank_order = request("rank_order")
