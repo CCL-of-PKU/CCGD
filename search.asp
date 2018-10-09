@@ -170,11 +170,12 @@ response.write "</div>"
 
 <%
 sub doSearch
-	dim cons_form, cons_example, variable_num_min, variable_num_max, constant_num_min, constant_num_max, url, cons_type, author, conditions
+	dim cons_form, cons_example, variable_num_min, variable_num_max, constant_num_min, constant_num_max, url, cons_type, author, conditions, cons_sense
 	conditions = Array() '收集查询条件 by Hybin on 2018-09-20
 	cons_form = Replace(request("cons_form"), "+", "")
 	cons_feature = request("cons_feature")	
 	cons_type = request("cons_type")
+	cons_sense = request("mono_poly")
 	cons_example = request("cons_example")
 	rank_type = request("rank_type")
 	rank_order = request("rank_order")
@@ -212,9 +213,22 @@ sub doSearch
 		url = url & "cons_form=" & cons_form_uri & "&"
 		call addItems(conditions, "构式形式：" & request("cons_form"))
 	end If
+	'增加构式义项查询，by Hybin on 2018-10-07
+	if not isStrEmpty(cons_sense) then
+		dim cxn_sense
+		if (cons_sense = "0") then
+			where = where & "AND yixiang = 0 "
+			cxn_sense = "单义构式"
+		else
+			where = where & "AND yixiang > 0 "
+			cxn_sense = "多义构式"
+		end if
+		url = url & "cons_sense=" & cons_sense & "&"
+		call addItems(conditions, "构式义项：" & cxn_sense)
+	end if
 	if not isStrEmpty(c_str) Then
 		'增加构式常项查询，by Dreamer on 2015-01-28
-		where = where & "AND (cstr = '" & c_str & "' or cstr like '" & c_str & " %' OR cstr like '% " & c_str & "') or cstr like '% " & c_str & " %'"		
+		where = where & "AND (cstr = '" & c_str & "' or cstr like '" & c_str & " %' OR cstr like '% " & c_str & "') or cstr like '% " & c_str & " %' "		
 		url = url & "c_str=" & c_str & "&"
 		call addItems(conditions, "构式常项：" & c_str)
 	end if
