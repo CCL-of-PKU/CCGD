@@ -37,7 +37,7 @@ ConstantInfo(1) = Array("syn_cat", "句法范畴", "text", "text")
 ConstantInfo(2) = Array("sem_cat", "语义范畴", "text", "text")
 ConstantInfo(3) = Array("prg_cat", "语用范畴", "text", "text")
 ConstantInfo(4) = Array("py", "拼音", "text", "text")
-ConstantInfo(5) = Array("lex", "词性", "text", "text")
+ConstantInfo(5) = Array("pos", "词性", "text", "text")
 
 ' 句法信息表：Syntax
 dim SyntaxInfo(17)
