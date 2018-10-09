@@ -29,6 +29,7 @@ VariableInfo(1) = Array("syn_cat", "句法范畴", "text", "text")
 VariableInfo(2) = Array("sem_cat", "语义范畴", "text", "text")
 VariableInfo(3) = Array("prg_cat", "语用范畴", "text", "text")
 VariableInfo(4) = Array("alter", "可替换度", "min-max", "num") 
+VariableInfo(5) = Array("vstring", "变项词性", "text", "text") 
 
 ' 常项信息表：Constan
 dim ConstantInfo(6)
@@ -36,8 +37,8 @@ ConstantInfo(0) = Array("position", "常项序位", "min-max", "num")
 ConstantInfo(1) = Array("syn_cat", "句法范畴", "text", "text")
 ConstantInfo(2) = Array("sem_cat", "语义范畴", "text", "text")
 ConstantInfo(3) = Array("prg_cat", "语用范畴", "text", "text")
-ConstantInfo(4) = Array("py", "拼音", "text", "text")
-ConstantInfo(5) = Array("pos", "词性", "text", "text")
+ConstantInfo(4) = Array("py", "常项拼音", "text", "text")
+ConstantInfo(5) = Array("pos", "常项词性", "text", "text")
 
 ' 句法信息表：Syntax
 dim SyntaxInfo(17)
